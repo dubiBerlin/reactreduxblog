@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions";
 
 class PostIndex extends Component {
   render() {
@@ -6,4 +8,5 @@ class PostIndex extends Component {
   }
 }
 
-export default PostIndex;
+// null weil nicht "mapStateToProps" übergeben wird
+export default connect(null, { fetchPosts: fetchPosts })(PostIndex);
