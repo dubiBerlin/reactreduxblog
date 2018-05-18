@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions";
+/*4.3 */ import _ from "lodash";
 
 class PostIndex extends Component {
   /* 2. wird erst dann ausgeführt nachdem die Komponente am bildschirm
@@ -9,9 +10,27 @@ class PostIndex extends Component {
     this.props.fetchPosts();
   }
 
+  /* 4.1. Methode erstellen die durch das Array von empfangenen
+          Daten läuft und die li Elemente zeichnet. */
+  renderPosts() {
+    return _.map(this.props.posts, post => {
+      return (
+        <li className="list-group-item" key={post.id}>
+          {post.title}
+        </li>
+      );
+    });
+  }
+
   render() {
     console.log(this.props.posts);
-    return <div>PostIndex</div>;
+    return (
+      <div>
+        {/* 4.2. renderPosts() Methode aufrufen */}
+        <h3>Posts</h3>
+        <ul className="list-group">{this.renderPosts()}</ul>
+      </div>
+    );
   }
 }
 
