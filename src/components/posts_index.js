@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions";
 /*4.3 */ import _ from "lodash";
+/* 5. link importieren für das routing wenn man auf den button klickt*/
+import { Link } from "react-router-dom";
 
 class PostIndex extends Component {
   /* 2. wird erst dann ausgeführt nachdem die Komponente am bildschirm
@@ -26,6 +28,12 @@ class PostIndex extends Component {
     console.log(this.props.posts);
     return (
       <div>
+        <div className="text-xs-right">
+          {/* to=> sagt wohin man navigieren muss  */}
+          <Link className=" btn btn-primary" to="/posts/new">
+            Add a Post
+          </Link>
+        </div>
         {/* 4.2. renderPosts() Methode aufrufen */}
         <h3>Posts</h3>
         <ul className="list-group">{this.renderPosts()}</ul>

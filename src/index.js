@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 
 import reducers from "./reducers";
@@ -17,12 +17,12 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-        {/* mit dem langäerem Pfad muss nach oben */}
-          <Route path="/post/new" component={PostsNew} />
+          {/* mit dem langäerem Pfad muss nach oben */}
+          <Route path="/posts/new" component={PostsNew} />
           <Route path="/" component={PostsIndex} />
-        <Switch>
+        </Switch>
       </div>
-      </BrowserRouter>
+    </BrowserRouter>
   </Provider>,
   document.querySelector(".container")
 );
