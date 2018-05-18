@@ -7,6 +7,7 @@ import promise from "redux-promise";
 
 import reducers from "./reducers";
 import PostsIndex from "./components/posts_index";
+import PostsNew from "./components/posts_new";
 
 // redux promise installieren und anschließend in die Middleware einbinden
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -15,10 +16,13 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
-        <div>Sacasy</div>
-        <Route path="/" component={PostsIndex} />
+        <Switch>
+        {/* mit dem langäerem Pfad muss nach oben */}
+          <Route path="/post/new" component={PostsNew} />
+          <Route path="/" component={PostsIndex} />
+        <Switch>
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
   </Provider>,
   document.querySelector(".container")
 );
