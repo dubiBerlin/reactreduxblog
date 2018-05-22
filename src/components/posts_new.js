@@ -19,9 +19,22 @@ class PostsNew extends Component {
     );
   }
 
+  /* 6.3 Diese eigens erstellte Methode wird
+         aufgerufen um die Daten zu versenden bzw. das zu tun nach dem alle Komponenten
+        innerhalb der Form überprüft worden sind.
+    param: values : (Object): wird von der handleSubmit Methode übergeben und enthält alle Werte  */
+  onSubmit(values) {
+    console.log(values);
+  }
+
   render() {
+    /* 6.1 handleSubmit ist eine Funtion die von ReduxForm an die Komponente übergeben wurde
+           in der binding Methode "export default reduxForm" */
+    const { handleSubmit } = this.props;
+
     return (
-      <form>
+      /* 6.2 handleSubmit bindet die Methode selbsterstellte Methode onSubmit() and das Form Element */
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         {/*3. field kann nur mit redux kommunizieren und weiß nicht wie es gezeichnet werden muss
               Es muss eine Funktion aufgerufen werden, die JSX zurückgibt, es also zeichnet */}
         <Field
@@ -67,7 +80,8 @@ function validate(values) {
   return errors;
 }
 
-/* 2. form:PostsNewForm hier registriert man alle Forms die sich in der Seite befinden */
+/* 2. bindet reduxForm an die Componente und übergibt somit viele eigene properties an die Komponente
+      form:PostsNewForm hier registriert man alle Forms die sich in der Seite befinden */
 export default reduxForm({
   /* 5.1. Validierungsfunktion in reduxForm registrieren  */
   validate: validate,
