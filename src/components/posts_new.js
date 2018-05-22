@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 /* 7. importieren um wieder zurück zu navigieren */
 import { Link } from "react-router-dom";
+/* 8. senden der daten zum server */
+import { connect } from "react-redux";
+import { createPost } from "../actions";
 
 class PostsNew extends Component {
   /* 4. field Param enthält Event Handlers die angebunden werden müssen.
@@ -38,6 +41,8 @@ class PostsNew extends Component {
         innerhalb der Form überprüft worden sind.
     param: values : (Object): wird von der handleSubmit Methode übergeben und enthält alle Werte  */
   onSubmit(values) {
+    /* 8.2 */
+    this.props.createPost(values);
     console.log(values);
   }
 
@@ -106,4 +111,4 @@ export default reduxForm({
   /* 5.1. Validierungsfunktion in reduxForm registrieren  */
   validate: validate,
   form: "PostsNewForm"
-})(PostsNew);
+})(connect(null, { createPost })(PostsNew)); // 8.1. den ActionCreator anbinden
