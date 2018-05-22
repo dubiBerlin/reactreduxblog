@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 /* 1. redux-form import */
 import { Field, reduxForm } from "redux-form";
+/* 7. importieren um wieder zurück zu navigieren */
+import { Link } from "react-router-dom";
 
 class PostsNew extends Component {
   /* 4. field Param enthält Event Handlers die angebunden werden müssen.
         Es fügt in das <Field> Element ein input Element ein. */
   renderField(field) {
     var className = "form-group";
+    /* gucken ob in das Field schon reingelickt wurde und ob error objekt besteht  */
     if (field.meta.error && field.meta.touched) {
       className = className + " has-danger";
     }
@@ -66,7 +69,10 @@ class PostsNew extends Component {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-        <button className="btn btn-secondary">Cancel</button>
+        {/* 7.1 navigation mit dem to paramter */}
+        <Link to="/" className="btn btn-danger">
+          Cancel
+        </Link>
       </form>
     );
   }
