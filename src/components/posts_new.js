@@ -6,18 +6,26 @@ class PostsNew extends Component {
   /* 4. field Param enthält Event Handlers die angebunden werden müssen.
         Es fügt in das <Field> Element ein input Element ein. */
   renderField(field) {
+    var className = "form-group";
+    if (field.meta.error && field.meta.touched) {
+      className = className + " has-danger";
+    }
+
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>{field.slabel}</label>
         {/* ... field.input deckt alle Eventhandlers ab */}
         <input type="text" className="form-control" {...field.input} />
-        {/* 5.2
-            field.meta.touched  = solange das unberührt ist, also es das erstmal geladen wurde,
+
+        <div className="text-help">
+          {/* 5.2
+            field.meta.touched  = solange das input Field unberührt ist, also es das erstmal geladen wurde,
             soll keine errormessage angezeigt werden.
             field.meta.error nimmt das "name" property und schaut im error-Objekten nach
-            ob es einen String gibt mit dem name property. Wenn ja, dann
+            ob es einen String gibt mit dem "name" property. Wenn ja, dann
            gibt er die Fehlermeldung zurück die in der validate() Methode eingefügt wurde. */}
-        {field.meta.touched ? field.meta.error : ""}
+          {field.meta.touched ? field.meta.error : ""}
+        </div>
       </div>
     );
   }
@@ -70,14 +78,17 @@ function validate(values) {
   const errors = {};
 
   // validate the imputs from "values"
-  if (!values.title || values.title != null) {
+  if (!values.title) {
     errors.title = "Enter a title!";
+    errors.class = "has-danger";
   }
   if (!values.categories) {
     errors.categories = "Enter some categories!";
+    errors.class = "has-danger";
   }
   if (!values.content) {
     errors.content = "Enter some content!";
+    errors.class = "has-danger";
   }
 
   return errors;
