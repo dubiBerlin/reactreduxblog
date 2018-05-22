@@ -11,10 +11,13 @@ class PostsNew extends Component {
         <label>{field.slabel}</label>
         {/* ... field.input deckt alle Eventhandlers ab */}
         <input type="text" className="form-control" {...field.input} />
-        {/* 5.2 field.meta.error nimmt das "name" property und schaut im error-Objekten nach
+        {/* 5.2
+            field.meta.touched  = solange das unberührt ist, also es das erstmal geladen wurde,
+            soll keine errormessage angezeigt werden.
+            field.meta.error nimmt das "name" property und schaut im error-Objekten nach
             ob es einen String gibt mit dem name property. Wenn ja, dann
            gibt er die Fehlermeldung zurück die in der validate() Methode eingefügt wurde. */}
-        {field.meta.error}
+        {field.meta.touched ? field.meta.error : ""}
       </div>
     );
   }
@@ -67,7 +70,7 @@ function validate(values) {
   const errors = {};
 
   // validate the imputs from "values"
-  if (!values.title) {
+  if (!values.title || values.title != null) {
     errors.title = "Enter a title!";
   }
   if (!values.categories) {
