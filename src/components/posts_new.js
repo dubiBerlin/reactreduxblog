@@ -40,7 +40,31 @@ class PostsNew extends Component {
   }
 }
 
+/* 5. Funktion die die Form Inputs validiert
+      param: values:(Object) enthält alle Werte die in die Form eingegeben wurden */
+function validate(values) {
+  const errors = {};
+
+  // validate the imputs from "values"
+  if (!values.title) {
+    errors.title = "Enter a title!";
+  }
+  if (values.title.length < 3) {
+    errors.title = "title must have at least three characters";
+  }
+  if (!values.categories) {
+    errors.categories = "Enter some categories!";
+  }
+  if (!values.content) {
+    errors.content = "Enter some content!";
+  }
+
+  return errors;
+}
+
 /* 2. form:PostsNewForm hier registriert man alle Forms die sich in der Seite befinden */
 export default reduxForm({
+  /* 5.1. Validierungsfunktion in reduxForm registrieren  */
+  validate: validate,
   form: "PostsNewForm"
 })(PostsNew);
