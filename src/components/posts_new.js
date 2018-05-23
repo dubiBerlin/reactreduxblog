@@ -42,8 +42,13 @@ class PostsNew extends Component {
     param: values : (Object): wird von der handleSubmit Methode übergeben und enthält alle Werte  */
   onSubmit(values) {
     /* 8.2 */
-    this.props.createPost(values);
-    console.log(values);
+    this.props.createPost(values, response => {
+      console.log("response", response);
+      /* 9. zurück navigieren nach dem response des servers. History ist ein prop des von React-Router in die+
+            PostNew Komponente eingefügt worden ist. Wenn Route zu einer Komponente hinnavigiert, injiziert sie in die
+            Komponente viele props, damit die Komponente weitere Navigationen handlen kann. */
+      this.props.history.push("/");
+    });
   }
 
   render() {

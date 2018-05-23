@@ -14,9 +14,13 @@ export function fetchPosts() {
   };
 }
 
-/*  */
-export function createPost(values) {
-  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+/* callback ist die Funktion die aufgerufen wird in der then Methode.
+    Der Inhalt der callback() wird in der Komponente definiert, die die Methode
+    createPost() aufruft. */
+export function createPost(values, callback) {
+  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values).then(() => {
+    callback();
+  });
 
   return {
     type: CREATE_POSTS,
